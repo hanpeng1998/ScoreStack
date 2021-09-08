@@ -1,0 +1,10 @@
+﻿@page 
+@model ScoreStack.Pages.Article.SingleModel
+@{
+}
+<h1>@Model.Article.Title</h1>
+<article>
+    <p>@Model.Article.Body</p>
+</article>
+<span>作者：</span><a href="/User/@Model.Article.Author.Id">@Model.Article.Author.Name</a>
+<span>赞：@ViewData["AgreeCount"]</span>

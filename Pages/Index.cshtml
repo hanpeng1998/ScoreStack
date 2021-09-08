@@ -4,7 +4,15 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>index</h1>
+
+@section Weights{ 
+<p>i m weights in index</p>
+}
+<p></p>
+<img src="~/Images/che.png"/>
+<img src="~/Images/che.png" asp-append-version="true"/>
+
+<a asp-page="/Log/On">登录</a>
+
+<a asp-page="/Article/Single" asp-route-id="8">文章</a>
