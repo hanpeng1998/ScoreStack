@@ -31,6 +31,8 @@ namespace ScoreStack
 
                     //opt.Conventions.AddPageRoute("/Article/Single", "/Article/{id?}");//?的意思是不管Article/后有没有id，都走/Article/Single这个url
                     opt.Conventions.AddPageRoute("/Article/Single", "/Article/{id:int}");
+
+                    opt.Conventions.AddPageRoute("/Article/index", "/Article/Page-{id:int}");
                 });
 
            

@@ -4,15 +4,36 @@
     ViewData["Title"] = "Home page";
 }
 
+
+@*<p></p>
+    <img src="~/Images/che.png" />
+    <img src="~/Images/che.png" asp-append-version="true" />
+
+    <a asp-page="/Log/On">登录</a>
+
+    <a asp-page="/Article/Single" asp-route-id="8">文章</a>
+
+    <pager path="/Index" pageIndex="3">第三页</pager>*@
+
+
+@*@section Weights{
+        <p>i m weights in index</p>
+    }*@
+
 <h1>index</h1>
 
-@section Weights{ 
-<p>i m weights in index</p>
-}
-<p></p>
-<img src="~/Images/che.png"/>
-<img src="~/Images/che.png" asp-append-version="true"/>
+<form method="post">
+    @*@foreach (var item in Model.Messages)
+    {
 
-<a asp-page="/Log/On">登录</a>
-
-<a asp-page="/Article/Single" asp-route-id="8">文章</a>
+    }*@
+    @for (int i = 0; i < Model.Messages.Count; i++)
+    {
+        <input asp-for="@Model.Messages[i].Selected" />
+        <span>@Model.Messages[i].CreateTime</span>
+        <span>@Model.Messages[i].Content</span>
+        <input type="hidden" asp-for="@Model.Messages[i].Id"/>
+        <hr />
+    }
+    <button type="submit">提交</button>
+</form>

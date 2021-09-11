@@ -1,13 +1,68 @@
-﻿@page
+﻿@page "{id?}"
 @* 这个page使用哪一个pageModel
     作用：进行传值
     页面的值就从pageModel里面来
 *@
 @model ScoreStack.Pages.RegisterModel
 @{
-
+    Layout = "Layout/_Dual";
+    ViewData["Title"] = "注册";
 }
 
-<h1>register</h1>
+
+
 @* 使用pageModel中的值，用法 在model里面的值可以直接在page使用*@
-<p>您好，@Model.Name!源站欢迎你</p>
+
+@if (ViewData["userName"] != null)
+{
+    <p>注册成功！@ViewData["userName"]</p>
+}
+
+<form method="post" asp-page="/Register">
+    <div style="padding:10px 20px;border:1px dashed #ccc;background-color:lightgoldenrodyellow;border-radius:4px;margin-bottom:20px;">
+        <div>
+            <label>邀请人：（* 必填，没有邀请人） </label>
+            <input asp-for="NewUser.InvitedBy.Name" class="form-control" />
+            <label>邀请码：（* 必填）</label>
+            <input asp-for="NewUser.InvitedBy.InviteCode" class="form-control"/>
+        </div>
+    </div>
+    <div>
+        <label>用户名：（* 必填）</label>
+        <input placeholder="登陆用户名，可修改不能重复" asp-for="NewUser.Name" class="form-control"/>
+    </div>
+    <div>
+        <label> 密码：（* 必填）</label>
+        <input placeholder="不少于四个字符" asp-for="NewUser.PassWord" class="form-control"/>
+    </div>
+    <div>
+        <label>  验证密码：（* 必填）</label>
+        <input placeholder="和密码相同" asp-for="ConfirmPassWord" class="form-control"/>
+    </div>
+    <div style="margin-bottom:20px"></div>
+    <input type="submit" value="提交" class="btn btn-primary"/>
+    <input type="reset" value="重置" class="btn btn-light"/>
+    @*<label asp-for="NewUser.Name"></label>*@
+    @*<input placeholder="...." asp-for="NewUser.Name" />*@
+    @*<input name="NewUser.Name"/>
+        <label>密码：</label>
+        <input asp-for="RemeberMe" />记住我
+        <br />
+        性别：<input type="radio" asp-for="NewUser.IsMail" value="true" />男
+        <input type="radio" asp-for="NewUser.IsMail" value="false" />女
+        <select asp-for="BirthMonth" asp-items="Model.AvailableMonths"></select>
+        <textarea asp-for="NewUser.Introduction"></textarea>
+        <button asp-page="/Edit" type="submit">修改</button>
+        <button asp-page="/Draft" type="submit">保存为草稿</button>*@
+    @*<button asp-page="/Index" type="submit">提交</button>*@
+</form>
+
+@section Description{ 
+    <ol>
+        <li>我们希望通过一起帮，能直接解决大家在电脑操作/软件使用/编程学习等方面的具体问题。</li>
+        <li>现在互联网远程技术（比如QQ桌面共享）已经非常成熟，当我们再遇到上述问题，如果别人能直接远程给予帮助，岂不是好？</li>
+        <li>当然，你也可以在你熟悉的领域去帮助别人。由此而形成我们这个“你帮他他帮我我帮你，大家一起帮”的网上互助社区平台。</li>
+        <li>公平起见，我们还引入了 帮帮点/币/豆 三级概念，以记录和衡量社区成员的收获和贡献。</li>
+        <li>赶快加入我们，赚取帮帮币吧！</li>
+    </ol>
+}

@@ -23,10 +23,12 @@ namespace ScoreStack.Pages.Article
         //public DateTime PublishTime { get; set; }
         public void OnGet()
         {
-            int pageIndex = Convert.ToInt32(Request.Query["pageIndex"][0]);
+            //int pageIndex = Convert.ToInt32(Request.Query["pageIndex"][0]);
+            int id = Convert.ToInt32(RouteData.Values["id"]);
             ViewData["Description"]= "飞哥的源栈培训：线上全程直播，免费收看；线下拎包入住，按周计费。本系列收录所有讲义（含视频录播地址）";
-            Articles = _articleRepository.Get(pageIndex,2);
+            Articles = _articleRepository.Get(id,2);
             //PublishTime = new DateTime(2020,5,6,10,6,6);
+            
         }
     }
 }

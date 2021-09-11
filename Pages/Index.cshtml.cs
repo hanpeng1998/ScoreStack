@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ScoreStack.Pages.Entityes;
+using ScoreStack.Pages.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +12,29 @@ namespace ScoreStack.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public MessageRepository messageRepository;
+        public IndexModel()
         {
-            _logger = logger;
+
+            messageRepository = new MessageRepository();
         }
+
+        [BindProperty]
+        public IList<Message> Messages{ get; set; }
 
         public void OnGet()
         {
-
+            Messages = messageRepository.GetMin();
+        }
+        public void OnPost()
+        {
+            foreach (var item in Messages)
+            {
+                if (item.Selected)
+                {
+                    messageRepository.Find(item.Id).Read();
+                }
+            }
         }
     }
 }

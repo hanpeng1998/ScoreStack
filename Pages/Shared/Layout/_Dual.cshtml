@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+    <div class="row">
+        <div class="col-4 ">
+            @RenderBody()
+        </div>
+        <div class="col-5 offset-1">
+            <h2>说明</h2>
+            @RenderSection("Description")
+        </div>
+    </div>
+</div>
+

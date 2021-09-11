@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Shared\Layout\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
