@@ -17,10 +17,12 @@
 
 
 @*@section Weights{
-        <p>i m weights in index</p>
+         <p>i m weights in index</p>
     }*@
 
 <h1>index</h1>
+
+<partial name="~/Views/_User.cshtml"/>
 
 <form method="post">
     @*@foreach (var item in Model.Messages)
@@ -35,5 +37,8 @@
         <input type="hidden" asp-for="@Model.Messages[i].Id"/>
         <hr />
     }
-    <button type="submit">提交</button>
+    <button type="submit">已读</button>
 </form>
+
+<vc:_keywords amount="2"></vc:_keywords>
+@*可能会有在index取10个数据，在single取5个数据这种需求，如何从父类页面控制*@

@@ -13,10 +13,24 @@
 
 @* 使用pageModel中的值，用法 在model里面的值可以直接在page使用*@
 
-@if (ViewData["userName"] != null)
+@*@if (ViewData["userName"] != null)
 {
     <p>注册成功！@ViewData["userName"]</p>
-}
+}*@
+<style>
+    
+    .field-validation-error {
+        color: red;
+        font-size: 12px;
+       
+    }
+       
+    
+</style>
+
+<div asp-validation-summary="ModelOnly">
+
+</div>
 
 <form method="post" asp-page="/Register">
     <div style="padding:10px 20px;border:1px dashed #ccc;background-color:lightgoldenrodyellow;border-radius:4px;margin-bottom:20px;">
@@ -24,24 +38,49 @@
             <label>邀请人：（* 必填，没有邀请人） </label>
             <input asp-for="NewUser.InvitedBy.Name" class="form-control" />
             <label>邀请码：（* 必填）</label>
-            <input asp-for="NewUser.InvitedBy.InviteCode" class="form-control"/>
+            <input asp-for="NewUser.InvitedBy.InviteCode" class="form-control" />
+            <span asp-validation-for="NewUser.InvitedBy.InviteCode" class="field-validation-error"></span>
+
         </div>
     </div>
     <div>
         <label>用户名：（* 必填）</label>
-        <input placeholder="登陆用户名，可修改不能重复" asp-for="NewUser.Name" class="form-control"/>
+        <input placeholder="登陆用户名，可修改不能重复" asp-for="NewUser.Name" class="form-control" />
+        <span asp-validation-for="NewUser.Name" class="field-validation-error"></span>
     </div>
     <div>
         <label> 密码：（* 必填）</label>
-        <input placeholder="不少于四个字符" asp-for="NewUser.PassWord" class="form-control"/>
+        <input placeholder="不少于四个字符" asp-for="NewUser.PassWord" class="form-control" />
+        <span asp-validation-for="NewUser.PassWord" class="field-validation-error"></span>
     </div>
     <div>
         <label>  验证密码：（* 必填）</label>
-        <input placeholder="和密码相同" asp-for="ConfirmPassWord" class="form-control"/>
+        <input placeholder="和密码相同" asp-for="ConfirmPassWord" class="form-control" />
+        <span asp-validation-for="ConfirmPassWord" class="field-validation-error"></span>
     </div>
-    <div style="margin-bottom:20px"></div>
-    <input type="submit" value="提交" class="btn btn-primary"/>
-    <input type="reset" value="重置" class="btn btn-light"/>
+
+    <div>
+        <label>个人主页</label>
+        <input asp-for="HomeUrl" class="form-control" />
+        <span asp-validation-for="HomeUrl" class="field-validation-error"></span>
+    </div>
+    <div>
+        <label>QQ:</label>
+        <input asp-for="QQ" class="form-control" />
+        <span asp-validation-for="QQ" class="field-validation-error"></span>
+    </div>
+    <div>
+        <label>验证码:</label>
+        <input asp-for="Captcha" class="form-control" />
+        <span asp-validation-for="Captcha" class="field-validation-error"></span>
+    </div>
+
+    <div style="margin-bottom:20px">
+        <input type="submit" value="提交" class="btn btn-primary" />
+        <input type="reset" value="重置" class="btn btn-light" />
+        <a href="/Contact" class="float-right">联系方式</a>
+    </div>
+
     @*<label asp-for="NewUser.Name"></label>*@
     @*<input placeholder="...." asp-for="NewUser.Name" />*@
     @*<input name="NewUser.Name"/>

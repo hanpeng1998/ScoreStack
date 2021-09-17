@@ -8,6 +8,7 @@
 <h3>@ViewData["Description"]</h3>
 @foreach (var item in Model.Articles)
 {
+
 <div>
     <small>@item.PublishTime.ToString("yyyy年MM月dd日HH时mm分ss秒")</small>
     <span> 作者：<a href="#">叶飞</a></span>
@@ -15,6 +16,9 @@
     @*<h2><a href="/Article/Single?id=@item.Id">@item.Title</a></h2>*@
     <p>@item.Body</p>
 </div>
+
+@*<partial name="_ArticleListItem" model="@item" />*@//也可以传ViewData 和for
+
 }
 
 @for (int i = 0; i < 9; i++)

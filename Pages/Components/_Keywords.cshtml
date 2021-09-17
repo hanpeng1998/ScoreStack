@@ -1,0 +1,12 @@
+﻿@using ScoreStack.Pages.Entityes
+@model IList<Keyword>
+@{
+}
+<h2>关键字</h2>
+@*view接受传入的model*@
+@*model代表IList<string>*@
+    @foreach (var item in Model)
+    {
+        @*<span>@item</span>*@
+        <a href="/Keywords/@item.Id">@item.Name</a>
+    }

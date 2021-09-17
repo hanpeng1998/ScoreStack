@@ -6,10 +6,24 @@
     <title>@ViewData["Title"] - 源栈</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/font-awesome.css" />
 </head>
 <body>
     <header>
         header
+        @*  ViewData["HasLogOn"]这个是on页面的，如果想让其他页面也有未登录和已经登录的切换显示就需要在index或者你想要显示的页面
+            拿到cooke进行判断，否则就不显示
+            *@
+        @if (ViewData["HasLogOn"] == null)
+        {
+            <span>未登录</span>
+
+        }
+        else
+        {
+            <span>已经登陆</span>
+        }
+        <a href="/Log/Off">退出登录</a>
         <hr />
     </header>
 

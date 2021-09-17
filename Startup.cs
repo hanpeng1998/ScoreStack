@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ScoreStack.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,14 @@ namespace ScoreStack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages()
+            services
+                .AddSession(opt=> {
+                    opt.Cookie.Name = "hpzq";
+                    opt.IdleTimeout = new TimeSpan(0, 0, 30);
+                    
+                })
+                .AddRazorPages()
+                //.AddMvcOptions(m=>m.Filters.Add<NeedLogOnAttribute>(/*typeof( NeedLogOnAttribute)*/))//»´æ÷π˝¬À≈‰÷√Filters
                 .AddRazorPagesOptions(opt =>
                 {
                     opt.Conventions.AddPageRoute("/Log/On", "/LogOn");
@@ -53,6 +61,8 @@ namespace ScoreStack
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();//session≈‰÷√
 
             app.UseAuthorization();
 

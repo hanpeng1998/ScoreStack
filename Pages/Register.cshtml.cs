@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ScoreStack.Filters;
+using ScoreStack.ModelValidations;
 using ScoreStack.Pages.Entityes;
 using ScoreStack.Pages.Repository;
 
 namespace ScoreStack.Pages
 {
+    //[ClearContextAttribute]
     [BindProperties]
     public class RegisterModel : PageModel
     {
@@ -23,14 +27,41 @@ namespace ScoreStack.Pages
         public User NewUser { get; set; }
 
         public string ConfirmPassWord { get; set; }//确认密码
-      
+
+        [Url(ErrorMessage ="*网址格式不正确")]
+        public string HomeUrl { get; set; }
+
+        [QQAttribute]
+        public string QQ { get; set; }
+
+        public string Captcha { get; set; }
+        
         public void OnGet()
         {
-          
+            string captcha = "c4g5";
+            //生成图片
+
+            HttpContext.Session.SetString("Captcha", captcha);
             
         }
         public void OnPost()
         {
+            //验证码
+            if (Captcha == HttpContext.Session.GetString("Captcha"))
+            {
+
+            }
+
+            if (ConfirmPassWord!=NewUser.PassWord)
+            {
+                ModelState.AddModelError(nameof(ConfirmPassWord), "两次输入的密码不一致");
+            }
+
+            
+            if (!ModelState.IsValid)
+            {
+                return;
+            }
             User invitedBy = _userRepository.GetByName(NewUser.InvitedBy.Name);
             //if (invitedBy ==null)
             //{
@@ -41,7 +72,7 @@ namespace ScoreStack.Pages
 
             //}
             NewUser.InvitedBy = invitedBy;
-            NewUser.Register();
+            NewUser.Register();//加十点帮帮点
             _userRepository.Save(NewUser);
             
         }

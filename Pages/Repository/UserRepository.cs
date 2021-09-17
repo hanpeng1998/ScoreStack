@@ -16,7 +16,8 @@ namespace ScoreStack.Pages.Repository
                 new User
                 {
                     Id=1,
-                    
+                    Name="yezi",
+                    PassWord="1234"
                 }
            
             };

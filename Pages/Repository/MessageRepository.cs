@@ -26,9 +26,18 @@ namespace ScoreStack.Pages.Repository
                 },
             };
         }
-        public IList<Message> GetMin()
+        public IList<Message> GetMin(bool OnlyNotRead=false)
         {
-            return messages;
+            //return messages;
+            if (OnlyNotRead)
+            {
+                return messages.Where(m => !m.HasRead).ToList();
+            }
+            else
+            {
+                return messages;
+            }
+            
         }
 
         public Message Find(int id)
